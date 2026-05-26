@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Info & Announcements Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* RESET & BASE STYLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: #1f2937;
+            padding-bottom: 60px;
+        }
+
+        /* HERO HEADER SECTION */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 15px;
+            color: #bfdbfe;
+        }
+
+        /* CONTAINER FOR CONTENT */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* QUICK LINKS SECTION */
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #111827;
+            border-left: 4px solid #3b82f6;
+            padding-left: 10px;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .quick-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .quick-link-btn:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* FILTER BUTTONS */
+        .filter-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .filter-btn {
+            background: #e5e7eb;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .filter-btn.active {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        /* ANNOUNCEMENTS CARDS */
+        .announcements-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.2s;
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        /* Tag Colors */
+        .tag-general { background: #dbeafe; color: #1e40af; }
+        .tag-youth { background: #fef3c7; color: #92400e; }
+        .tag-welfare { background: #dcfce7; color: #166534; }
+        .tag-archive { background: #f3f4f6; color: #4b5563; }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .card-time {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+
+        .card-body {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        /* ARCHIVE SECTION SEPARATOR */
+        .archive-separator {
+            margin: 40px 0 25px 0;
+            border: 0;
+            border-top: 1px dashed #d1d5db;
+        }
+
+        .archive-section .section-title {
+            border-left-color: #9ca3af;
+            color: #4b5563;
+        }
+
+        .archive-section .card {
+            background: #fdfdfd;
+            opacity: 0.8; /* Subtle visual cue for past events */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>Faith Chapel Media Hub</h1>
+        <p>Stay updated with our weekly activities and announcements</p>
+    </div>
+
+    <div class="container">
+        
+        <h2 class="section-title">Quick Links</h2>
+        <div class="links-grid">
+            <a href="#" target="_blank" class="quick-link-btn">🔴 Watch Live stream</a>
+            <a href="#" target="_blank" class="quick-link-btn">📝 Prayer Request Form</a>
+            <a href="#" target="_blank" class="quick-link-btn">📖 Bible Reading Plan</a>
+        </div>
+
+        <h2 class="section-title">This Week's Notices</h2>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterEvents('all')">All Notices</button>
+            <button class="filter-btn" onclick="filterEvents('general')">General</button>
+            <button class="filter-btn" onclick="filterEvents('youth')">Youth Ministry</button>
+            <button class="filter-btn" onclick="filterEvents('welfare')">Welfare</button>
+            <button class="filter-btn" onclick="filterEvents('archive')">Past Archives Only</button>
+        </div>
+
+        <div class="announcements-list" id="currentList">
+            
+            <div class="card event-card general">
+                <span class="card-tag tag-general">General</span>
+                <h3 class="card-title">Mid-Week Prayer & Revival Service</h3>
+                <div class="card-time">📅 Every Wednesday at 6:30 PM</div>
+                <p class="card-body">Join us this Wednesday in the main auditorium as we gather for a powerful time of prayer, worship, and deep study of the Word. Come with your family and a heart expectant for a blessing.</p>
+            </div>
+
+            <div class="card event-card youth">
+                <span class="card-tag tag-youth">Youth Ministry</span>
+                <h3 class="card-title">Youth Radical Praise Night</h3>
+                <div class="card-time">📅 Friday, 29th May at 6:00 PM</div>
+                <p class="card-body">The Youth Ministry invites all young people to our monthly praise and game night. It’s going to be an atmosphere of intense worship, networking, and fun. Refreshments will be served!</p>
+            </div>
+
+        </div>
+
+        <hr class="archive-separator" id="archiveDivider">
+
+        <div class="archive-section" id="archiveSection">
+            <h2 class="section-title">Past Announcements Archive</h2>
+            <div class="announcements-list">
+                
+                <div class="card event-card archive general">
+                    <span class="card-tag tag-archive">Archived (May 17)</span>
+                    <h3 class="card-title">Special Mother's Day Service</h3>
+                    <div class="card-time">📅 Sunday, 17th May</div>
+                    <p class="card-body">A special celebratory service dedicated to honoring all mothers. Special prayers, gift packages, and blessings will be shared during both services.</p>
+                </div>
+
+                <div class="card event-card archive welfare">
+                    <span class="card-tag tag-archive">Archived (May 10)</span>
+                    <h3 class="card-title">Church Clean-up Exercise</h3>
+                    <div class="card-time">📅 Saturday, 10th May at 6:00 AM</div>
+                    <p class="card-body">All departments are requested to come out in their numbers as we undertake our bi-monthly sanitation and clean-up drive within and around the church premises.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function filterEvents(category) {
+            // Update active state on buttons
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const allCards = document.querySelectorAll('.event-card');
+            const archiveSection = document.getElementById('archiveSection');
+            const currentListHeader = document.querySelector('.container > .section-title:nth-of-type(2)');
+            const divider = document.getElementById('archiveDivider');
+
+            if (category === 'archive') {
+                // Hide current header, divider and active lists completely
+                currentListHeader.style.display = 'none';
+                divider.style.display = 'none';
+                archiveSection.style.display = 'block';
+
+                allCards.forEach(card => {
+                    if (card.classList.contains('archive')) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            } else {
+                // Restore regular layout view
+                currentListHeader.style.display = 'block';
+                divider.style.display = 'block';
+                archiveSection.style.display = 'block';
+
+                allCards.forEach(card => {
+                    if (category === 'all') {
+                        card.style.display = 'block';
+                    } else if (card.classList.contains(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
